@@ -1,0 +1,66 @@
+{
+ "feito": [
+  {
+   "data": "2026-04-26",
+   "texto": "Primeira versão: zonas de vigor a partir de imagens de satélite"
+  },
+  {
+   "data": "2026-04-26",
+   "texto": "Ligação ao Copernicus: pesquisa de imagens Sentinel-2"
+  },
+  {
+   "data": "2026-05-03",
+   "texto": "Primeira interface web: desenhar a parcela e analisar"
+  },
+  {
+   "data": "2026-05-14",
+   "texto": "Análise plurianual e recomendações por IA para cada zona"
+  },
+  {
+   "data": "2026-09-03",
+   "texto": "As vinhas do OpenStreetMap aparecem no mapa e selecionam-se com um clique"
+  },
+  {
+   "data": "2026-09-09",
+   "texto": "Pesquisa de localidade no mapa"
+  },
+  {
+   "data": "2026-10-27",
+   "texto": "Espaço de trabalho por parcela: caderno de campo, meteorologia e agenda"
+  },
+  {
+   "data": "2026-10-27",
+   "texto": "Evolução do NDVI da parcela e mapa de cada imagem; recomendações passam para a agenda"
+  },
+  {
+   "data": "2026-10-27",
+   "texto": "Análises muito mais rápidas: 6 meses de imagens passam de dezenas de minutos para cerca de 1 minuto"
+  },
+  {
+   "data": "2026-10-27",
+   "texto": "Tarefas marcadas no terreno com pins"
+  },
+  {
+   "data": "2026-11-03",
+   "texto": "Versão para telemóvel: mapa em ecrã inteiro e painel deslizante"
+  },
+  {
+   "data": "2026-11-04",
+   "texto": "Instalável no ecrã principal do telemóvel"
+  },
+  {
+   "data": "2026-11-07",
+   "texto": "Gráficos legíveis ao toque"
+  },
+  {
+   "data": "2026-11-09",
+   "texto": "Análises de vários anos passam a cobrir o período completo"
+  }
+ ],
+ "a_seguir": [
+  "Imagens de maior resolução (PlanetScope a 3 m ou drone) para ver a vinha linha a linha",
+  "Visitas de campo com fotografias associadas a pontos da parcela",
+  "Intervalos de segurança dos produtos antes da vindima",
+  "Contas de utilizador para várias empresas e técnicos"
+ ]
+}

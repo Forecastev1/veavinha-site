@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vêavinha — Vê a vinha.</title>
+  <meta name="description" content="Satélite, caderno de campo, meteorologia e agenda, numa só ferramenta para o técnico de vinha. Em desenvolvimento.">
+  <meta name="theme-color" content="#0E0F0D">
+  <link rel="icon" type="image/png" href="icone-veavinha.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+
+  <header class="bar">
+    <a class="mark" href="#topo" aria-label="Vêavinha, início">VÊAVINHA</a>
+    <nav aria-label="Secções">
+      <ul>
+        <li><a href="#orbita"><span class="n">02</span> Órbita</a></li>
+        <li><a href="#ferramentas"><span class="n">03</span> Ferramentas</a></li>
+        <li><a href="#curva"><span class="n">04</span> Curva</a></li>
+        <li><a href="#terreno"><span class="n">05</span> Terreno</a></li>
+        <li><a href="#funcoes"><span class="n">06</span> O que faz</a></li>
+        <li class="nav-cta"><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- 01 · HERO ======================================================= -->
+    <section class="hero sec" id="topo" aria-labelledby="hero-titulo">
+      <div class="tags tags--top" aria-hidden="true">
+        <span>FIG. 01</span>
+        <span class="js-coords">38.9697° N · 9.0761° W</span>
+        <span class="hide-sm">SENTINEL-2 L2A · B04 B05 B08 · 10 m</span>
+      </div>
+
+      <div class="hero__grid">
+        <div class="hero__text">
+          <h1 id="hero-titulo" class="display">Vê a<br>vinha.</h1>
+          <p class="hero__lede">Satélite, caderno de campo, meteorologia e agenda, numa só ferramenta para o técnico de vinha.</p>
+          <p class="seal"><span class="seal__dot" aria-hidden="true"></span>EM DESENVOLVIMENTO</p>
+        </div>
+
+        <figure class="hero__map">
+          <div class="instrument">
+            <div class="instrument__head mono" aria-hidden="true">
+              <span>NDVI MENSAL</span>
+              <span>22 × 24 PX · 10 m</span>
+            </div>
+            <div class="hero__canvas-wrap">
+              <canvas id="hero-canvas" role="img" aria-label="Mapa de NDVI da Vinha da Encosta, perto de Arruda dos Vinhos, em 243 píxeis Sentinel-2 de 10 metros, com o contorno da parcela a tracejado. Mostra uma imagem por mês, de novembro de 2024 a novembro de 2026, em ciclo."></canvas>
+              <noscript><img src="dados/zonas-vinha-da-encosta.svg" alt="Mapa de zonas de vigor da Vinha da Encosta, em píxeis de 10 metros."></noscript>
+            </div>
+            <div class="readout" aria-live="off">
+              <p class="readout__main mono"><span id="hero-month">NOV 2026</span> · NDVI <span id="hero-ndvi">0.53</span></p>
+              <p class="readout__sub mono">IMAGEM <span id="hero-date">2 NOV 2026</span></p>
+            </div>
+            <div class="months" id="hero-months" aria-hidden="true"></div>
+            <div class="instrument__foot">
+              <div class="ramp" aria-hidden="true">
+                <span class="mono">0.10</span><span class="ramp__bar" id="ramp-bar"></span><span class="mono">0.75</span>
+              </div>
+              <button class="btn-mono" id="hero-toggle" type="button" aria-pressed="false">Pausa</button>
+            </div>
+          </div>
+          <figcaption class="cap mono">FIG. 01 — NDVI de cada mês · Vinha da Encosta · nov 2024 – nov 2026. Dados reais de uma vinha perto de Arruda dos Vinhos; o nome é de demonstração.</figcaption>
+        </figure>
+      </div>
+
+      <div class="tags tags--bottom" aria-hidden="true">
+        <span>ARRUDA DOS VINHOS · PT</span>
+        <span>TOURIGA NACIONAL · 2.46 ha</span>
+      </div>
+    </section>
+
+    <!-- 02 · SCROLLY ==================================================== -->
+    <section class="sec scrolly-sec" id="orbita" aria-labelledby="orbita-titulo">
+      <div class="tags tags--top" aria-hidden="true">
+        <span>02 / ÓRBITA</span>
+        <span class="hide-sm">786 km → 10 m → 1 linha</span>
+        <span>SENTINEL-2 L2A · B04 B05 B08 · 10 m</span>
+      </div>
+
+      <h2 id="orbita-titulo" class="h2 sec__title">De 786 km<br>à linha da vinha.</h2>
+
+      <div class="scrolly">
+        <div class="scrolly__panel" aria-hidden="false">
+          <div class="scrolly__stage">
+
+            <figure class="layer is-active" data-layer="1">
+              <svg class="orbit" viewBox="0 0 440 440" role="img" aria-labelledby="orbit-t">
+                <title id="orbit-t">Esquema: o Sentinel-2 em órbita a 786 km, a observar uma faixa de 290 km da superfície.</title>
+                <g fill="none" style="stroke:var(--chalk)">
+                  <path d="M-40 420 Q220 300 480 420" stroke-width="1.2"/>
+                  <path d="M-40 230 Q220 70 480 230" stroke-width="1" stroke-dasharray="2 5" opacity=".55"/>
+                  <line x1="220" y1="150" x2="220" y2="355" stroke-width="1" stroke-dasharray="4 4"/>
+                  <line x1="220" y1="150" x2="120" y2="372" stroke-width="1" opacity=".35"/>
+                  <line x1="220" y1="150" x2="320" y2="372" stroke-width="1" opacity=".35"/>
+                  <path d="M120 372 Q220 352 320 372" stroke-width="2" opacity=".6"/>
+                </g>
+                <g class="orbit__sat">
+                  <rect x="212" y="142" width="16" height="16" style="fill:var(--bg);stroke:var(--chalk)"/>
+                  <rect x="176" y="146" width="32" height="8" fill="none" style="stroke:var(--chalk)"/>
+                  <line x1="208" y1="150" x2="212" y2="150" style="stroke:var(--chalk)"/>
+                </g>
+                <rect class="orbit__target" x="216" y="354" width="8" height="8" fill="#AAC850"/>
+                <g class="orbit__labels" font-size="10" letter-spacing="1.2" style="fill:var(--chalk);font-family:var(--mono)">
+                  <text x="232" y="128">SENTINEL-2</text>
+                  <text x="232" y="250">786 km</text>
+                  <text x="20" y="430" style="fill:var(--dim)">FAIXA 290 km · REVISITA DE POUCOS DIAS</text>
+                  <text x="232" y="345" style="fill:var(--px-label)">1 PX = 10 m</text>
+                  <text x="20" y="40" style="fill:var(--dim)">ÓRBITA HÉLIO-SÍNCRONA</text>
+                  <text x="20" y="56" style="fill:var(--dim)">13 BANDAS · DO VISÍVEL AO SWIR</text>
+                </g>
+              </svg>
+              <figcaption class="cap mono">FIG. 02a — Órbita do Sentinel-2 · 786 km · faixa de 290 km</figcaption>
+            </figure>
+
+            <figure class="layer" data-layer="2">
+              <div class="bands">
+                <table class="bands__t mono">
+                  <caption class="sr-only">Camadas Sentinel-2 usadas nos resultados e onde entram</caption>
+                  <thead><tr><th scope="col">Camada</th><th scope="col">λ</th><th scope="col">Res.</th><th scope="col">NDVI</th><th scope="col">NDRE</th><th scope="col">Máscara</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">B04 <span>Vermelho</span></th><td>665 nm</td><td>10 m</td><td><i aria-label="sim"></i></td><td></td><td></td></tr>
+                    <tr><th scope="row">B05 <span>Red edge</span></th><td>705 nm</td><td>20 m</td><td></td><td><i aria-label="sim"></i></td><td></td></tr>
+                    <tr><th scope="row">B08 <span>Infravermelho próximo</span></th><td>842 nm</td><td>10 m</td><td><i aria-label="sim"></i></td><td><i aria-label="sim"></i></td><td></td></tr>
+                    <tr><th scope="row">SCL <span>Classificação da cena</span></th><td>—</td><td>20 m</td><td></td><td></td><td><i aria-label="sim"></i></td></tr>
+                  </tbody>
+                </table>
+                <p class="bands__f mono">NDVI = (B08 − B04) / (B08 + B04)<br>NDRE = (B08 − B05) / (B08 + B05)</p>
+              </div>
+              <figcaption class="cap mono">FIG. 02b — Camadas que chegam aos resultados · reamostradas para 10 m</figcaption>
+            </figure>
+
+            <figure class="layer" data-layer="3">
+              <div class="zones">
+                <canvas id="zones-canvas" role="img" aria-label="Mapa de zonas de vigor da Vinha da Encosta em 243 píxeis de 10 metros: 34 de vigor baixo, 111 de vigor médio, 61 de vigor alto e 37 instáveis."></canvas>
+                <ol class="zones__legend mono" id="zones-legend"></ol>
+              </div>
+              <figcaption class="cap mono">FIG. 02c — Zonas de vigor · Vinha da Encosta · 172 imagens · nov 2024 – nov 2026</figcaption>
+            </figure>
+
+            <figure class="layer" data-layer="4">
+              <div class="plate">
+                <img src="capturas-site/02-satelite-zonas.png" width="1440" height="900" alt="A aplicação no computador: separador Satélite da Vinha da Encosta, com a curva do NDVI de 172 imagens, a tabela de zonas com área, NDVI e tendência, e o mapa de zonas de vigor por cima da imagem de satélite.">
+              </div>
+              <figcaption class="cap mono">FIG. 02d — Separador Satélite · zonas sobre a imagem de fundo · dados de demonstração nas tarefas</figcaption>
+            </figure>
+
+            <figure class="layer" data-layer="5">
+              <div class="phone phone--panel">
+                <img src="capturas-site/11-telemovel-agenda.png" width="780" height="1688" loading="lazy" alt="A aplicação no telemóvel: mapa da parcela com pins de tarefas e, por baixo, o painel da agenda com uma tarefa atrasada e o botão Concluir.">
+              </div>
+              <figcaption class="cap mono">FIG. 02e — Agenda no telemóvel · pins no terreno</figcaption>
+            </figure>
+
+          </div>
+        </div>
+
+        <ol class="scrolly__steps">
+          <li class="step is-active" data-step="1">
+            <p class="step__k mono">01 · ÓRBITA · 786 km</p>
+            <h3 class="step__h">Um satélite passa por cima.</h3>
+            <p>O Sentinel-2 é do programa europeu Copernicus. Anda a 786 km de altitude e fotografa uma faixa de 290 km de cada vez. Volta a passar sobre a mesma vinha a cada poucos dias, e as imagens são gratuitas.</p>
+            <p>Mede a luz em treze bandas, do azul ao infravermelho médio. Cada uma vê a vegetação de uma maneira diferente.</p>
+          </li>
+          <li class="step" data-step="2">
+            <p class="step__k mono">02 · BANDAS · NDVI + NDRE</p>
+            <h3 class="step__h">Mais do que vermelho e infravermelho.</h3>
+            <p>Para cada data vêm só os píxeis da parcela, numa grelha de 10 m. O vermelho e o infravermelho próximo dão o NDVI, que faz as zonas e a curva.</p>
+            <p>O red edge dá o NDRE, que reage à clorofila mesmo com a copa fechada e entra nas recomendações de cada zona. A classificação da cena marca nuvens, sombras e água, e esses píxeis ficam de fora.</p>
+          </li>
+          <li class="step" data-step="3">
+            <p class="step__k mono">03 · PÍXEL · 10 × 10 m</p>
+            <h3 class="step__h">A parcela, em quadrados de 10 m.</h3>
+            <p>Cada píxel cobre 100 m². Esta parcela cabe em 243. A análise junta 172 imagens, tira nuvens e sombras píxel a píxel e divide a parcela em zonas.</p>
+            <p>Vigor baixo, médio, alto e instável: cada zona com a sua área, o seu NDVI e a sua tendência. As zonas comparam a parcela consigo mesma: vigor baixo quer dizer mais fraco do que o resto desta vinha.</p>
+          </li>
+          <li class="step" data-step="4">
+            <p class="step__k mono">04 · ECRÃ · A APLICAÇÃO</p>
+            <h3 class="step__h">As zonas por cima do terreno.</h3>
+            <p>No computador, as zonas ficam sobre a imagem de satélite. Ao lado está a curva do NDVI e a tabela das zonas. Tocar num ponto da curva abre o mapa dessa data.</p>
+          </li>
+          <li class="step" data-step="5">
+            <p class="step__k mono">05 · TERRENO · O PIN</p>
+            <h3 class="step__h">E no bolso, no meio das linhas.</h3>
+            <p>No telemóvel, o mesmo mapa. Cada tarefa tem um pin no sítio onde é para fazer: branco se está planeada, âmbar se é para hoje, vermelho se está atrasada.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 03 · TABS ======================================================= -->
+    <section class="sec" id="ferramentas" aria-labelledby="ferr-titulo">
+      <div class="tags tags--top" aria-hidden="true">
+        <span>03 / FERRAMENTAS</span>
+        <span class="hide-sm">RESUMO · SATÉLITE · CADERNO · METEO · AGENDA</span>
+        <span>1 PARCELA</span>
+      </div>
+
+      <div class="sec__intro">
+        <h2 id="ferr-titulo" class="h2">Uma parcela,<br>cinco ferramentas.</h2>
+        <p class="lede">Cada parcela abre com os mesmos cinco separadores. Os ecrãs são da aplicação; as tarefas e os registos são de demonstração.</p>
+      </div>
+
+      <div class="tabs">
+        <div class="tabs__bar" role="tablist" aria-label="Ferramentas da parcela">
+          <button role="tab" id="tab-resumo" aria-controls="panel-resumo" aria-selected="true">Resumo</button>
+          <button role="tab" id="tab-satelite" aria-controls="panel-satelite" aria-selected="false" tabindex="-1">Satélite</button>
+          <button role="tab" id="tab-caderno" aria-controls="panel-caderno" aria-selected="false" tabindex="-1">Caderno</button>
+          <button role="tab" id="tab-meteo" aria-controls="panel-meteo" aria-selected="false" tabindex="-1">Meteo</button>
+          <button role="tab" id="tab-agenda" aria-controls="panel-agenda" aria-selected="false" tabindex="-1">Agenda</button>
+        </div>
+
+        <div class="tabs__panel" role="tabpanel" id="panel-resumo" aria-labelledby="tab-resumo" tabindex="0">
+          <figure class="tabs__fig">
+            <div class="plate"><img src="capturas-site/07-resumo-parcela.png" width="1440" height="900" loading="lazy" alt="Separador Resumo da Vinha da Encosta: área de 2.46 ha, casta Touriga Nacional, solo franco-argiloso, NDVI da última análise, o tempo com um alerta de chuva forte, as tarefas por fazer e as últimas operações."></div>
+            <figcaption class="cap mono">FIG. 03a — Resumo · Vinha da Encosta</figcaption>
+          </figure>
+          <ol class="facts">
+            <li><span class="mono">01</span>Área, casta, solo e o NDVI da última análise, logo no topo.</li>
+            <li><span class="mono">02</span>O tempo de hoje e os alertas que tocam a esta parcela.</li>
+            <li><span class="mono">03</span>As tarefas por fazer e as últimas operações do caderno, com atalho para cada separador.</li>
+          </ol>
+        </div>
+
+        <div class="tabs__panel" role="tabpanel" id="panel-satelite" aria-labelledby="tab-satelite" tabindex="0" hidden>
+          <figure class="tabs__fig">
+            <div class="plate"><img src="capturas-site/02-satelite-zonas.png" width="1440" height="900" loading="lazy" alt="Separador Satélite: curva do NDVI de 172 imagens, tabela das quatro zonas de vigor e o mapa de zonas sobre a imagem de satélite."></div>
+            <figcaption class="cap mono">FIG. 03b — Satélite · zonas de vigor · 172 imagens</figcaption>
+          </figure>
+          <div class="facts-col">
+            <ol class="facts">
+              <li><span class="mono">01</span>Meses ou anos de imagens Sentinel-2 numa só análise. Nuvens e sombras saem píxel a píxel.</li>
+              <li><span class="mono">02</span>O NDVI faz as zonas e a curva. O NDRE de cada zona entra nas recomendações. Zonas com área, NDVI e tendência.</li>
+              <li><span class="mono">03</span>Para cada zona, causa provável, gravidade, ações e quando atuar. Cada ação passa para a agenda.</li>
+            </ol>
+            <figure class="tabs__fig tabs__fig--small">
+              <div class="plate"><img src="capturas-site/03-recomendacoes-ia.png" width="1440" height="900" loading="lazy" alt="Recomendações por zona no separador Satélite, com gravidade e ações sugeridas."></div>
+              <figcaption class="cap mono">FIG. 03c — Recomendações por zona</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="tabs__panel" role="tabpanel" id="panel-caderno" aria-labelledby="tab-caderno" tabindex="0" hidden>
+          <figure class="tabs__fig">
+            <div class="plate"><img src="capturas-site/06-caderno-de-campo.png" width="1440" height="900" loading="lazy" alt="Separador Caderno: operações por mês, como tratamento fitossanitário com calda bordalesa, mobilização do solo, fertilização, vindima e rega, com produto e dose."></div>
+            <figcaption class="cap mono">FIG. 03d — Caderno de campo · registos de demonstração</figcaption>
+          </figure>
+          <ol class="facts">
+            <li><span class="mono">01</span>Tratamentos, fertilização, poda, rega, mobilização do solo, operações em verde e vindima.</li>
+            <li><span class="mono">02</span>Cada registo leva o produto e a dose.</li>
+            <li><span class="mono">03</span>Filtra por operação e exporta para CSV ou Excel.</li>
+          </ol>
+        </div>
+
+        <div class="tabs__panel" role="tabpanel" id="panel-meteo" aria-labelledby="tab-meteo" tabindex="0" hidden>
+          <figure class="tabs__fig">
+            <div class="plate"><img src="capturas-site/04b-meteorologia-grafico.png" width="1440" height="900" loading="lazy" alt="Separador Meteo: previsão a 7 dias, gráfico de temperatura e precipitação dos últimos 30 dias e da previsão, chuva acumulada, evapotranspiração, balanço hídrico e graus-dia."></div>
+            <figcaption class="cap mono">FIG. 03e — Meteo · 30 dias e previsão · Open-Meteo</figcaption>
+          </figure>
+          <ol class="facts">
+            <li><span class="mono">01</span>Os últimos 30 dias e a previsão a 7 dias, no ponto da parcela.</li>
+            <li><span class="mono">02</span>Graus-dia de base 10 °C, região de Winkler, chuva acumulada, evapotranspiração e balanço hídrico.</li>
+            <li><span class="mono">03</span>Alertas de geada, calor, chuva forte e risco de míldio pela regra 3-10. Dias favoráveis a tratamentos.</li>
+          </ol>
+        </div>
+
+        <div class="tabs__panel" role="tabpanel" id="panel-agenda" aria-labelledby="tab-agenda" tabindex="0" hidden>
+          <figure class="tabs__fig">
+            <div class="plate"><img src="capturas-site/05-agenda-pins.png" width="1440" height="900" loading="lazy" alt="Separador Agenda: lista de tarefas por data e o mapa da parcela com pins brancos, âmbar e vermelhos nos pontos de intervenção."></div>
+            <figcaption class="cap mono">FIG. 03f — Agenda · pins no terreno · tarefas de demonstração</figcaption>
+          </figure>
+          <ol class="facts">
+            <li><span class="mono">01</span>Tarefas por data e tipo, cada uma com um pin no ponto exato.</li>
+            <li><span class="mono">02</span>Branco: planeada. Âmbar: para hoje. Vermelho: atrasada.</li>
+            <li><span class="mono">03</span>Ao concluir, o registo passa sozinho para o caderno de campo.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · CURVA ====================================================== -->
+    <section class="sec" id="curva" aria-labelledby="curva-titulo">
+      <div class="tags tags--top" aria-hidden="true">
+        <span>04 / SÉRIE NDVI</span>
+        <span class="hide-sm js-coords">38.9697° N · 9.0761° W</span>
+        <span>NOV 2024 – NOV 2026</span>
+      </div>
+
+      <div class="sec__intro">
+        <h2 id="curva-titulo" class="h2">Dois anos<br>numa curva.</h2>
+        <p class="lede">Cada ponto é uma imagem de satélite sem nuvens sobre a parcela: o NDVI médio dos seus píxeis nesse dia.</p>
+      </div>
+
+      <figure class="chart">
+        <p class="chart__read mono" id="chart-read" aria-live="polite">4 NOV 2026 · NDVI 0.507 · NUVENS 0%</p>
+        <div class="chart__box" id="chart-box">
+          <svg id="chart" role="img" tabindex="0" aria-labelledby="chart-t chart-d">
+            <title id="chart-t">Série de NDVI da Vinha da Encosta, novembro de 2024 a novembro de 2026</title>
+            <desc id="chart-d">172 imagens Sentinel-2. O NDVI médio da parcela varia entre 0.18 e 0.69. Use as setas esquerda e direita para percorrer os pontos.</desc>
+          </svg>
+        </div>
+        <figcaption class="cap mono">FIG. 04 — NDVI médio da parcela · <span id="chart-n">172</span> imagens Sentinel-2 · nov 2024 – nov 2026 · Linha cortada quando há mais de 60 dias sem imagem.</figcaption>
+      </figure>
+
+      <p class="note">Dados reais de uma vinha perto de Arruda dos Vinhos. A vinha muda ao longo do ano; é essa mudança que o técnico acompanha.</p>
+    </section>
+
+    <!-- 05 · TERRENO ==================================================== -->
+    <section class="sec" id="terreno" aria-labelledby="terreno-titulo">
+      <div class="tags tags--top" aria-hidden="true">
+        <span>05 / TERRENO</span>
+        <span class="hide-sm">390 × 844 · ECRÃ INTEIRO</span>
+        <span>TELEMÓVEL</span>
+      </div>
+
+      <div class="field">
+        <div class="field__text">
+          <h2 id="terreno-titulo" class="h2">No terreno.</h2>
+          <dl class="field__list">
+            <div>
+              <dt class="mono">A · O SÍTIO EXATO</dt>
+              <dd>A tarefa marca-se com o dedo, no ponto da parcela onde é para fazer. Quem lá for vê o pin no mapa.</dd>
+            </div>
+            <div>
+              <dt class="mono">B · O PAINEL</dt>
+              <dd>O mapa ocupa o ecrã inteiro. O painel da parcela arrasta-se para cima e para baixo, sem tapar o terreno quando não é preciso.</dd>
+            </div>
+            <div>
+              <dt class="mono">C · NO ECRÃ PRINCIPAL</dt>
+              <dd>Instala-se no ecrã principal do telemóvel e abre como as outras aplicações.</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="phones">
+          <figure class="phones__item reveal">
+            <div class="phone"><img src="capturas-site/09-telemovel-visao-geral.png" width="780" height="1688" loading="lazy" alt="Visão geral no telemóvel: mapa com as parcelas e o painel com a lista de parcelas e tarefas."></div>
+            <figcaption class="cap mono">FIG. 05a — Visão geral</figcaption>
+          </figure>
+          <figure class="phones__item reveal">
+            <div class="phone"><img src="capturas-site/10-telemovel-satelite.png" width="780" height="1688" loading="lazy" alt="Satélite no telemóvel: zonas de vigor sobre o mapa da parcela e, no painel, a curva do NDVI de 172 imagens."></div>
+            <figcaption class="cap mono">FIG. 05b — Satélite</figcaption>
+          </figure>
+          <figure class="phones__item reveal">
+            <div class="phone"><img src="capturas-site/11-telemovel-agenda.png" width="780" height="1688" loading="lazy" alt="Agenda no telemóvel: pins de tarefas no mapa e uma tarefa atrasada no painel, com o botão Concluir."></div>
+            <figcaption class="cap mono">FIG. 05c — Agenda</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · O QUE FAZ ================================================== -->
+    <section class="sec" id="funcoes" aria-labelledby="funcoes-titulo">
+      <div class="tags tags--top" aria-hidden="true">
+        <span>06 / FICHA</span>
+        <span class="hide-sm">COMPUTADOR · TELEMÓVEL</span>
+        <span>EM DESENVOLVIMENTO</span>
+      </div>
+
+      <div class="sec__intro">
+        <h2 id="funcoes-titulo" class="h2">O que já faz.</h2>
+        <p class="lede">Tudo o que está nesta lista funciona hoje na aplicação.</p>
+      </div>
+
+      <div class="log">
+        <ol class="log__list">
+          <li class="log__item">
+            <span class="log__date">PARCELAS</span><span class="log__rail"></span>
+            <ul class="log__texts">
+              <li>As vinhas do OpenStreetMap aparecem no mapa e escolhem-se com um clique. Também se pode desenhar o contorno à mão.</li>
+              <li>Pesquisa por localidade. Cada parcela guarda nome, casta e tipo de solo.</li>
+              <li>A visão geral junta o número de parcelas, a área total e as tarefas por fazer ou atrasadas.</li>
+            </ul>
+          </li>
+          <li class="log__item">
+            <span class="log__date">SATÉLITE</span><span class="log__rail"></span>
+            <ul class="log__texts">
+              <li>Análise de meses ou anos de imagens Sentinel-2, com nuvens e sombras removidas píxel a píxel.</li>
+              <li>NDVI a partir do vermelho e do infravermelho próximo; NDRE a partir do red edge. A classificação da cena tira nuvens, sombras e água.</li>
+              <li>Zonas relativas à própria parcela: vigor baixo quer dizer mais fraco do que o resto desta vinha.</li>
+              <li>Zonas de vigor baixo, médio, alto e instável, com área, NDVI e tendência.</li>
+              <li>Curva do NDVI da parcela: tocar num ponto abre o mapa dessa data.</li>
+              <li>Recomendações por zona com causa provável, gravidade, ações e quando atuar. Têm em conta o NDVI e o NDRE de cada zona, o solo, o declive da parcela e a meteorologia dos últimos 30 dias. Cada ação passa para a agenda.</li>
+              <li>A análise partilha-se por link.</li>
+            </ul>
+          </li>
+          <li class="log__item">
+            <span class="log__date">CADERNO</span><span class="log__rail"></span>
+            <ul class="log__texts">
+              <li>Tratamentos fitossanitários, fertilização, poda, rega, mobilização do solo, operações em verde e vindima, com produto e dose.</li>
+              <li>Filtros e exportação para CSV ou Excel.</li>
+            </ul>
+          </li>
+          <li class="log__item">
+            <span class="log__date">METEO</span><span class="log__rail"></span>
+            <ul class="log__texts">
+              <li>Últimos 30 dias e previsão a 7 dias, no ponto da parcela.</li>
+              <li>Graus-dia de base 10 °C, região de Winkler, chuva acumulada, evapotranspiração e balanço hídrico.</li>
+              <li>Alertas de geada, calor, chuva forte e risco de míldio pela regra 3-10. Dias favoráveis a tratamentos, sem chuva e com vento abaixo de 20 km/h.</li>
+            </ul>
+          </li>
+          <li class="log__item">
+            <span class="log__date">AGENDA</span><span class="log__rail"></span>
+            <ul class="log__texts">
+              <li>Tarefas por data e tipo, cada uma com um pin no ponto exato da parcela.</li>
+              <li>Branco: planeada. Âmbar: para hoje. Vermelho: atrasada.</li>
+              <li>Ao concluir, o registo passa para o caderno de campo.</li>
+            </ul>
+          </li>
+          <li class="log__item">
+            <span class="log__date">TELEMÓVEL</span><span class="log__rail"></span>
+            <ul class="log__texts">
+              <li>Mapa em ecrã inteiro e painel que se arrasta.</li>
+              <li>Instala-se no ecrã principal.</li>
+              <li>Gráficos legíveis ao toque.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <div class="next">
+          <h3 class="next__h mono">A SEGUIR · EM ESTUDO</h3>
+          <p class="next__note">Ideias em estudo. Sem datas e sem promessa.</p>
+          <ol class="next__list" id="next-list"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · CONTACTO =================================================== -->
+    <section class="sec contact" id="contacto" aria-labelledby="contacto-titulo">
+      <div class="tags tags--top" aria-hidden="true">
+        <span>07 / CONTACTO</span>
+        <span class="hide-sm">EM DESENVOLVIMENTO</span>
+        <span>PT</span>
+      </div>
+      <h2 id="contacto-titulo" class="display display--contact">Queres ver a tua vinha?</h2>
+      <div class="contact__row">
+        <p class="lede">O Vêavinha está em desenvolvimento. Se acompanhas vinhas e queres experimentar, escreve.</p>
+        <a class="btn" href="mailto:veavinha@gmail.com">Escrever para veavinha@gmail.com <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="mono">Imagens: Copernicus Sentinel-2 (ESA) · © OpenStreetMap contributors · Imagem de fundo: Esri · Meteorologia: Open-Meteo · <span id="ano">2026</span></p>
+    <p class="mono foot__mark">VÊAVINHA · EM DESENVOLVIMENTO</p>
+  </footer>
+
+  <script src="dados/vinha-da-encosta.js"></script>
+  <script src="dados/diario.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
